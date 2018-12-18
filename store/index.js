@@ -7,8 +7,12 @@ const createStore = () => {
       output: "empty",
       testhtml: "<p>testabsatz</p>",
       steine: [],
-      pointer: 0
+      pointer: 0,
+      baseAudio: "http://chorin-content.culture-to-go.de/files/"
     }),
+    getters: {
+
+    },
     mutations: {
       increment (state) {
         state.counter++

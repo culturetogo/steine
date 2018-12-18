@@ -12,6 +12,33 @@
           class="mx-auto d-block">
         </div>
         <div v-html = "$store.state.steine[$store.state.pointer].attributes.body" />
+        <div
+          v-if="$store.state.steine[$store.state.pointer].attributes.transkription"
+          id="transkription" >
+          <h3>Inschrift</h3>
+          <p
+            v-html = "$store.state.steine[$store.state.pointer].attributes.transkription" />
+        </div>
+        <div
+          v-if="$store.state.steine[$store.state.pointer].attributes.info"
+          id="Info" >
+          <h3>Weiterführende Information</h3>
+          <p
+            v-html = "$store.state.steine[$store.state.pointer].attributes.info" />
+        </div>
+        <div
+          v-if="$store.state.steine[$store.state.pointer].attributes.bibeltext"
+          id="bibeltext" >
+          <h3>Bibeltext</h3>
+          <p
+            v-html = "$store.state.steine[$store.state.pointer].attributes.introbibeltext" />
+          <audio controls>
+            <source
+              :src="$store.state.baseAudio + $store.state.steine[$store.state.pointer].attributes.bibeltext"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
     </section>
   </div>
