@@ -61,6 +61,43 @@
             Your browser does not support the audio element.
           </audio>
         </div>
+        <div
+          v-if="checkGesang && (getAudioVersion == 1)"
+          id="gesang" >
+          <h3>Gesang</h3>
+          <p
+            v-html = "getIntroGesang" />
+          <audio
+            id="audio_g_01"
+            controls>
+            <source
+              :src="getGesang"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div
+          v-if="checkGesang && (getAudioVersion == 2)"
+          id="gesang" >
+          <h3>Gesang</h3>
+          <p
+            v-html = "getIntroGesang" />
+          <audio
+            id="audio_g_02"
+            controls>
+            <source
+              :src="getGesang"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div
+          v-if="getCopyright"
+          id="copyright" >
+          <hr>
+          <p
+            v-html = "getCopyright" />
+        </div>
       </div>
     </section>
   </div>
@@ -88,9 +125,13 @@ export default {
       'getText',
       'getTranskription',
       'getInfo',
+      'getCopyright',
       'getBibeltext',
+      'getGesang',
       'getIntroBibeltext',
+      'getIntroGesang',
       'checkBibeltext',
+      'checkGesang',
       'getAudioVersion'
     ])
   },

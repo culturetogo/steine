@@ -37,11 +37,20 @@ const createStore = () => {
       getInfo (state) {
         return state.steine_ak_tour[state.pointer].attributes.info
       },
+      getCopyright (state) {
+        return state.steine_ak_tour[state.pointer].attributes.copyright
+      },
       getBibeltext (state) {
         return state.baseAudio + state.steine_ak_tour[state.pointer].attributes.bibeltext
       },
+      getGesang (state) {
+        return state.baseAudio + state.steine_ak_tour[state.pointer].attributes.gesang
+      },
       getIntroBibeltext (state) {
         return state.steine_ak_tour[state.pointer].attributes.introbibeltext
+      },
+      getIntroGesang (state) {
+        return state.steine_ak_tour[state.pointer].attributes.introgesang
       },
       // Check-Funktionen
       checkBibeltext (state) {
@@ -50,7 +59,13 @@ const createStore = () => {
         } else {
           return false
         }
-
+      },
+      checkGesang (state) {
+        if (state.steine_ak_tour[state.pointer].attributes.gesang != "" ) {
+          return true
+        } else {
+          return false
+        }
       }
     },
     mutations: {
