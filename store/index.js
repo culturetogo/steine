@@ -84,7 +84,7 @@ const createStore = () => {
         state.pointer = pointer
         // Reload Audio-Element bei Stein-Wechsel
         state.audio_version = state.audio_version == 1 ? state.audio_version = 2 : state.audio_version = 1
-        console.log("mutation payload: ", payload)
+        console.log(state.audio_version)
       },
       toggleTour (state) {
         console.log("Tour vor Toggle: ", state.tour)
