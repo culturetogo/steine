@@ -1,14 +1,14 @@
 <template>
   <div>
     <nav class="navbar fixed-top navbar-light bg-light">
-      <button @click="$store.dispatch('pointerVor', -1)">&larr;</button>
+      <button @click="$store.dispatch('pointerVor', -1), stopAllAuido()">&larr;</button>
       <div class="tour-controls d-flex justify-content-around mt-3">
         <p
           class="tour-button"
           @click="$store.commit('toggleTour')"><strong>{{ getTour }}</strong></p>
         <p class="anz-stein"><strong>{{ getTitel }}</strong></p>
       </div>
-      <button @click="$store.dispatch('pointerVor', 1)">&rarr;</button>
+      <button @click="$store.dispatch('pointerVor', 1), stopAllAuido()">&rarr;</button>
     </nav>
     <section class="container mt-5">
       <div>
@@ -136,11 +136,8 @@ export default {
     ])
   },
   methods: {
-    async fetchSomething() {
-      const ip = await this.$axios.$get('http://icanhazip.com')
-      //this.ip = ip
-      this.out = ip
-      console.log( ip )
+    async stopAllAuido() {
+     console.log("Stop All Audio!")
     }
   }
 }
