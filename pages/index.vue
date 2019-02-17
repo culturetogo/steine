@@ -21,7 +21,7 @@
           v-if="getTranskription"
           id="transkription" >
           <h3>Inschrift</h3>
-          <p
+          <div
             v-html = "getTranskription" />
         </div>
         <div
@@ -50,7 +50,7 @@
           v-if="checkGesang"
           id="gesang" >
           <h3>Gesang</h3>
-          <p
+          <div
             v-html = "getIntroGesang" />
           <audio
             id="audio_g_01"
