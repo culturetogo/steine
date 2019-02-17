@@ -1,18 +1,37 @@
 <template>
   <div>
-    <nav class="navbar fixed-top navbar-light bg-light">
-      <button @click="$store.dispatch('pointerVor', -1)">&larr;</button>
-      <div class="tour-controls d-flex justify-content-around mt-3">
-        <p
-          class="tour-button"
-          @click="$store.commit('toggleTour')"><strong>{{ getTour }}</strong></p>
-        <p class="anz-stein"><strong>{{ getTitel }}</strong></p>
-      </div>
-      <button @click="$store.dispatch('pointerVor', 1)">&rarr;</button>
-    </nav>
+    <nav class="navbar fixed-top navbar-light bg-light" />
     <section class="container mt-5">
-      <div>
-        MAP
+      <div id="map-container">
+        <figure id="imagemap">
+          <svg viewBox="0 0 3000 2000" >
+            <defs>
+              <style>
+                rect:hover {
+                fill: white;
+                opacity:0.5;
+                }
+              </style>
+            </defs>
+
+            <image
+              width="3000"
+              height="2000"
+              xlink:href="~/assets/map_01.jpg">
+              <title>Mount Rushmore National Memorial</title>
+            </image>
+
+            <a
+              xlink:href="https://de.wikipedia.org/wiki/George_Washington">
+              <rect
+                :x="marker_pos_left"
+                :y="marker_pos_top"
+                opacity=".1"
+                width="250"
+                height="300" />
+            </a>
+          </svg>
+        </figure>
       </div>
     </section>
   </div>
@@ -27,7 +46,9 @@ export default {
   },
   data(){
     return {
-      test: ""
+      test: "",
+      marker_pos_top: "1000",
+      marker_pos_left: "1000"
     }
   },
   computed: {
@@ -76,5 +97,18 @@ section {
 .tour-button {
   cursor: pointer;
 }
-
+#map-container {
+  position: relative;
+  width: 100%;
+  background: #eee;
+}
+#map-container .map {
+  width: 100%;
+}
+#map-container .marker {
+  position: absolute;
+  width: 20px;
+  top: 50%;
+  left: 33.3%;
+}
 </style>
