@@ -32,7 +32,7 @@
             v-html = "getInfo" />
         </div>
         <div
-          v-if="checkBibeltext && (getAudioVersion == 1)"
+          v-if="checkBibeltext"
           id="bibeltext" >
           <h3>Bibeltext</h3>
           <p
@@ -47,22 +47,7 @@
           </audio>
         </div>
         <div
-          v-if="checkBibeltext && (getAudioVersion == 2)"
-          id="bibeltext" >
-          <h3>Bibeltext</h3>
-          <p
-            v-html = "getIntroBibeltext" />
-          <audio
-            id="audio_02"
-            controls>
-            <source
-              :src="getBibeltext"
-              type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-        <div
-          v-if="checkGesang && (getAudioVersion == 1)"
+          v-if="checkGesang"
           id="gesang" >
           <h3>Gesang</h3>
           <p
@@ -76,28 +61,10 @@
             Your browser does not support the audio element.
           </audio>
         </div>
+        <hr>
         <div
-          v-if="checkGesang && (getAudioVersion == 2)"
-          id="gesang" >
-          <h3>Gesang</h3>
-          <p
-            v-html = "getIntroGesang" />
-          <audio
-            id="audio_g_02"
-            controls>
-            <source
-              :src="getGesang"
-              type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-        <div
-          v-if="getCopyright"
-          id="copyright" >
-          <hr>
-          <p
-            v-html = "getCopyright" />
-        </div>
+          class="copyright"
+          v-html="getCopyright" />
       </div>
     </section>
   </div>
@@ -138,6 +105,7 @@ export default {
   methods: {
     async stopAllAuido() {
      console.log("Stop All Audio!")
+     console.log();
     }
   }
 }
