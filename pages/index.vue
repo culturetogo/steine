@@ -10,8 +10,18 @@
       </div>
       <button @click="$store.dispatch('pointerVor', 1), stopAllAuido()">&rarr;</button>
     </nav>
-    <section class="container mt-5">
+    <section
+      v-if="getMode == 'details'"
+      class="container mt-5"
+    >
       <div>
+        <div id="map-icon">
+          <img
+            class="map-icon-img"
+            src="~/assets/Map_Icon.png"
+            @click="$store.dispatch('changeMode', 'map')"
+          >
+        </div>
         <div class="steinbild"><img
           :src="getBildSteinUrl"
           class="mx-auto d-block">
@@ -68,9 +78,47 @@
           class="copyright"
           v-html="getCopyright" />
       </div>
-
     </section>
-    <Map />
+    <section
+      v-if="getMode == 'map'"
+      class="container mt-5"
+    >
+      <div id="map-container">
+        <figure id="imagemap">
+          <svg viewBox="0 0 1000 1000" >
+            <defs>
+              <style>
+                rect:hover {
+                fill: green;
+                opacity:0.5;
+                }
+              </style>
+            </defs>
+
+            <image
+              width="1000"
+              height="1000"
+              xlink:href="~/assets/Plan_Master_01.png">
+              <title>Mount Rushmore National Memorial</title>
+            </image>
+
+            <a
+              v-for="(marker, index) in getMarkers"
+              :key="index"
+              xlink:href=""
+              @click.prevent="$store.dispatch('pointerTo', marker.index)"
+            >
+              <rect
+                :x="marker.marker_pos_left"
+                :y="marker.marker_pos_top"
+                :width="getMarker.width"
+                :height="getMarker.height"
+                opacity=".1" />
+            </a>
+          </svg>
+        </figure>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -88,10 +136,12 @@ export default {
     return {
       test: "data",
       out: "leer",
+      mapIcon: "~/assets/Plan_Master_01.png"
     }
   },
   computed: {
     ...mapGetters([
+      'getMode',
       'getTour',
       'getTitel',
       'getBildSteinUrl',
@@ -106,7 +156,9 @@ export default {
       'checkBibeltext',
       'checkGesang',
       'getAudioVersion',
-      'getAudio'
+      'getAudio',
+      'getMarker',
+      'getMarkers'
     ])
   },
   methods: {
@@ -121,12 +173,12 @@ export default {
 <style scoped>
 
 .container {
-  min-height: 100vh;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
 }
+
 section {
 
   max-width: 24rem;
@@ -139,13 +191,34 @@ section {
 .tour-button {
   display: block;
 }
-.steinbild {
+#map-icon {
   margin-top: 2rem;
+}
+#map-icon .map-icon-img {
+  cursor: pointer;
+}
+.steinbild {
+  margin-top: 1rem;
   background: #333;
 }
 .steinbild img {
   max-height: 16rem;
   height: auto;
+}
+
+#map-container {
+  position: relative;
+  width: 100%;
+  background: #eee;
+}
+#map-container .map {
+  width: 100%;
+}
+#map-container .marker {
+  position: absolute;
+  width: 20px;
+  top: 50%;
+  left: 33.3%;
 }
 .tour-controls {
   min-width: 14rem;

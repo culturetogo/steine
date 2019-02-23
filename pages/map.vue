@@ -25,7 +25,7 @@
               v-for="(marker, index) in getMarkers"
               :key="index"
               xlink:href=""
-              @click.prevent="$store.dispatch('pointerTo', marker.index)"
+              @click="$store.dispatch('pointerTo', marker.index)"
             >
               <rect
                 :x="marker.marker_pos_left"

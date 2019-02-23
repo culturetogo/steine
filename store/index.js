@@ -6,6 +6,7 @@ const createStore = () => {
       counter: 0,
       output: "empty",
       testhtml: "<p>testabsatz</p>",
+      mode: 'map',
       steine: [],
       steine_innen: [],
       steine_aussen: [],
@@ -35,6 +36,9 @@ const createStore = () => {
       ]
     }),
     getters: {
+      getMode (state) {
+        return state.mode
+      },
       getTour (state) {
         return state.tour
       },
@@ -140,7 +144,12 @@ const createStore = () => {
       },
       pointerTo (state, payload) {
         state.pointer = payload
+        state.mode = "details"
         console.log("nach PointerTo", state.pointer)
+      },
+      changeMode (state, payload) {
+        state.mode = payload
+        console.log("ChangeMode: ", payload)
       }
     },
     actions: {
@@ -158,6 +167,10 @@ const createStore = () => {
       },
       pointerTo ({ commit }, n){
         commit( 'pointerTo', n)
+      }
+      ,
+      changeMode ({ commit }, m) {
+        commit( 'changeMode', m)
       }
     }
   })
