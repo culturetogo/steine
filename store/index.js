@@ -13,7 +13,24 @@ const createStore = () => {
       tour: "Innen",
       audio_version: 2,
       pointer: 0,
-      baseAudio: "http://chorin-content.culture-to-go.de/files/"
+      baseAudio: "http://chorin-content.culture-to-go.de/files/",
+      audio: 1,
+      marker: {
+        width: 100,
+        height: 300,
+      },
+      markers: [
+        {
+          stein: "innen_1",
+          marker_pos_top: "1100",
+          marker_pos_left: "1000"
+        },
+        {
+          stein: "innen_2",
+          marker_pos_top: "200",
+          marker_pos_left: "2000"
+        }
+      ]
     }),
     getters: {
       getTour (state) {
@@ -66,6 +83,15 @@ const createStore = () => {
         } else {
           return false
         }
+      },
+      getAudio (state) {
+        return state.audio
+      },
+      getMarker (state) {
+        return state.marker
+      },
+      getMarkers (state) {
+        return state.markers
       }
     },
     mutations: {
@@ -97,9 +123,6 @@ const createStore = () => {
         pointer = pointer < 0 ? state.steine_ak_tour.length -1 : pointer
         pointer = pointer > state.steine_ak_tour.length -1 ? pointer = 0 : pointer
         state.pointer = pointer
-        // Reload Audio-Element bei Stein-Wechsel
-        state.audio_version = state.audio_version == 1 ? state.audio_version = 2 : state.audio_version = 1
-        console.log(state.audio_version)
       },
       toggleTour (state) {
         console.log("Tour vor Toggle: ", state.tour)

@@ -38,6 +38,7 @@
           <p
             v-html = "getIntroBibeltext" />
           <audio
+            v-if="getAudio"
             id="audio_01"
             controls>
             <source
@@ -53,6 +54,7 @@
           <p
             v-html = "getIntroGesang" />
           <audio
+            v-if="getAudio"
             id="audio_g_01"
             controls>
             <source
@@ -99,7 +101,8 @@ export default {
       'getIntroGesang',
       'checkBibeltext',
       'checkGesang',
-      'getAudioVersion'
+      'getAudioVersion',
+      'getAudio'
     ])
   },
   methods: {

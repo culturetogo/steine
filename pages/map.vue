@@ -22,13 +22,17 @@
             </image>
 
             <a
-              xlink:href="https://de.wikipedia.org/wiki/George_Washington">
+              v-for="(marker, index) in getMarkers"
+              :key="index"
+              xlink:href=""
+              @click.prevent="callStone(marker.stein)"
+            >
               <rect
-                :x="marker_pos_left"
-                :y="marker_pos_top"
-                opacity=".1"
-                width="250"
-                height="300" />
+                :x="marker.marker_pos_left"
+                :y="marker.marker_pos_top"
+                :width="getMarker.width"
+                :height="getMarker.height"
+                opacity=".1" />
             </a>
           </svg>
         </figure>
@@ -46,18 +50,19 @@ export default {
   },
   data(){
     return {
-      test: "",
-      marker_pos_top: "1000",
-      marker_pos_left: "1000"
+      test: ""
     }
   },
   computed: {
     ...mapGetters([
-
+      'getMarker',
+      'getMarkers'
     ])
   },
   methods: {
-
+    callStone(stein) {
+      console.log("Call: ", stein )
+    }
   }
 }
 </script>
