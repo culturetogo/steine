@@ -16,19 +16,21 @@ const createStore = () => {
       baseAudio: "http://chorin-content.culture-to-go.de/files/",
       audio: 1,
       marker: {
-        width: 100,
-        height: 300,
+        width: 60,
+        height: 60,
       },
       markers: [
         {
+          index: 1,
           stein: "innen_1",
-          marker_pos_top: "1100",
-          marker_pos_left: "1000"
+          marker_pos_top: "120",
+          marker_pos_left: "200"
         },
         {
+          index: 2,
           stein: "innen_2",
-          marker_pos_top: "200",
-          marker_pos_left: "2000"
+          marker_pos_top: "240",
+          marker_pos_left: "100"
         }
       ]
     }),
@@ -135,6 +137,10 @@ const createStore = () => {
             state.pointer = 0
             state.steine_ak_tour = state.steine_innen
           }
+      },
+      pointerTo (state, payload) {
+        state.pointer = payload
+        console.log("nach PointerTo", state.pointer)
       }
     },
     actions: {
@@ -149,6 +155,9 @@ const createStore = () => {
       },
       pointerVor ({ commit }, r) {
         commit('pointerMove', r)
+      },
+      pointerTo ({ commit }, n){
+        commit( 'pointerTo', n)
       }
     }
   })

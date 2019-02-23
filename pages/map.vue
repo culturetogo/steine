@@ -4,20 +4,20 @@
     <section class="container mt-5">
       <div id="map-container">
         <figure id="imagemap">
-          <svg viewBox="0 0 3000 2000" >
+          <svg viewBox="0 0 1000 1000" >
             <defs>
               <style>
                 rect:hover {
-                fill: white;
+                fill: green;
                 opacity:0.5;
                 }
               </style>
             </defs>
 
             <image
-              width="3000"
-              height="2000"
-              xlink:href="~/assets/map_01.jpg">
+              width="1000"
+              height="1000"
+              xlink:href="~/assets/Plan_Master_01.png">
               <title>Mount Rushmore National Memorial</title>
             </image>
 
@@ -25,7 +25,7 @@
               v-for="(marker, index) in getMarkers"
               :key="index"
               xlink:href=""
-              @click.prevent="callStone(marker.stein)"
+              @click.prevent="$store.dispatch('pointerTo', marker.index)"
             >
               <rect
                 :x="marker.marker_pos_left"
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     callStone(stein) {
-      console.log("Call: ", stein )
+
     }
   }
 }
