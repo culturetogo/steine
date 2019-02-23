@@ -99,12 +99,12 @@
               width="1000"
               height="1000"
               xlink:href="~/assets/Plan_Master_01.png">
-              <title>Mount Rushmore National Memorial</title>
+              <title>Plan</title>
             </image>
-
             <a
               v-for="(marker, index) in getMarkers"
               :key="index"
+              class="a-marker"
               xlink:href=""
               @click.prevent="$store.dispatch('pointerTo', marker.index)"
             >
@@ -214,17 +214,13 @@ section {
 #map-container .map {
   width: 100%;
 }
-#map-container .marker {
-  position: absolute;
-  width: 20px;
-  top: 50%;
-  left: 33.3%;
-}
 .tour-controls {
   min-width: 14rem;
 }
 .tour-button {
   cursor: pointer;
 }
-
+.a-marker {
+  border: 1px solid red;
+}
 </style>
