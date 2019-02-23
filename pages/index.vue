@@ -38,6 +38,7 @@
           <p
             v-html = "getIntroBibeltext" />
           <audio
+            v-if="getAudio"
             id="audio_01"
             controls>
             <source
@@ -53,6 +54,7 @@
           <div
             v-html = "getIntroGesang" />
           <audio
+            v-if="getAudio"
             id="audio_g_01"
             controls>
             <source
@@ -66,17 +68,21 @@
           class="copyright"
           v-html="getCopyright" />
       </div>
+
     </section>
+    <Map />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+//import Logo from '~/components/Logo.vue'
+//import Map from '~/components/Map.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     // Logo
+    // Map
   },
   data(){
     return {
@@ -99,7 +105,8 @@ export default {
       'getIntroGesang',
       'checkBibeltext',
       'checkGesang',
-      'getAudioVersion'
+      'getAudioVersion',
+      'getAudio'
     ])
   },
   methods: {

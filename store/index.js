@@ -13,7 +13,26 @@ const createStore = () => {
       tour: "Innen",
       audio_version: 2,
       pointer: 0,
-      baseAudio: "http://chorin-content.culture-to-go.de/files/"
+      baseAudio: "http://chorin-content.culture-to-go.de/files/",
+      audio: 1,
+      marker: {
+        width: 60,
+        height: 60,
+      },
+      markers: [
+        {
+          index: 1,
+          stein: "innen_1",
+          marker_pos_top: "120",
+          marker_pos_left: "200"
+        },
+        {
+          index: 2,
+          stein: "innen_2",
+          marker_pos_top: "240",
+          marker_pos_left: "100"
+        }
+      ]
     }),
     getters: {
       getTour (state) {
@@ -66,6 +85,15 @@ const createStore = () => {
         } else {
           return false
         }
+      },
+      getAudio (state) {
+        return state.audio
+      },
+      getMarker (state) {
+        return state.marker
+      },
+      getMarkers (state) {
+        return state.markers
       }
     },
     mutations: {
@@ -97,9 +125,6 @@ const createStore = () => {
         pointer = pointer < 0 ? state.steine_ak_tour.length -1 : pointer
         pointer = pointer > state.steine_ak_tour.length -1 ? pointer = 0 : pointer
         state.pointer = pointer
-        // Reload Audio-Element bei Stein-Wechsel
-        state.audio_version = state.audio_version == 1 ? state.audio_version = 2 : state.audio_version = 1
-        console.log(state.audio_version)
       },
       toggleTour (state) {
         console.log("Tour vor Toggle: ", state.tour)
@@ -112,6 +137,10 @@ const createStore = () => {
             state.pointer = 0
             state.steine_ak_tour = state.steine_innen
           }
+      },
+      pointerTo (state, payload) {
+        state.pointer = payload
+        console.log("nach PointerTo", state.pointer)
       }
     },
     actions: {
@@ -126,6 +155,9 @@ const createStore = () => {
       },
       pointerVor ({ commit }, r) {
         commit('pointerMove', r)
+      },
+      pointerTo ({ commit }, n){
+        commit( 'pointerTo', n)
       }
     }
   })

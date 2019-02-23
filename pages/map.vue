@@ -4,31 +4,35 @@
     <section class="container mt-5">
       <div id="map-container">
         <figure id="imagemap">
-          <svg viewBox="0 0 3000 2000" >
+          <svg viewBox="0 0 1000 1000" >
             <defs>
               <style>
                 rect:hover {
-                fill: white;
+                fill: green;
                 opacity:0.5;
                 }
               </style>
             </defs>
 
             <image
-              width="3000"
-              height="2000"
-              xlink:href="~/assets/map_01.jpg">
+              width="1000"
+              height="1000"
+              xlink:href="~/assets/Plan_Master_01.png">
               <title>Mount Rushmore National Memorial</title>
             </image>
 
             <a
-              xlink:href="https://de.wikipedia.org/wiki/George_Washington">
+              v-for="(marker, index) in getMarkers"
+              :key="index"
+              xlink:href=""
+              @click.prevent="$store.dispatch('pointerTo', marker.index)"
+            >
               <rect
-                :x="marker_pos_left"
-                :y="marker_pos_top"
-                opacity=".1"
-                width="250"
-                height="300" />
+                :x="marker.marker_pos_left"
+                :y="marker.marker_pos_top"
+                :width="getMarker.width"
+                :height="getMarker.height"
+                opacity=".1" />
             </a>
           </svg>
         </figure>
@@ -46,18 +50,19 @@ export default {
   },
   data(){
     return {
-      test: "",
-      marker_pos_top: "1000",
-      marker_pos_left: "1000"
+      test: ""
     }
   },
   computed: {
     ...mapGetters([
-
+      'getMarker',
+      'getMarkers'
     ])
   },
   methods: {
+    callStone(stein) {
 
+    }
   }
 }
 </script>
