@@ -14,14 +14,17 @@
       v-if="getMode == 'details'"
     >
       <b-row>
-        <b-col>
+        <div
+          class="mmok-content"
+        >
           <img
             :src="getBildSteinUrl"
           >
-        </b-col>
+        </div>
       </b-row>
       <b-row>
-        <b-col
+        <div
+          class="mmok-content"
           v-html = "getText"
         />
       </b-row>
@@ -151,11 +154,8 @@ export default {
 
 <style scoped>
 
-.container {
+.mmok-content {
 
-}
-
-section {
 }
 .navbar {
   display: flex;
