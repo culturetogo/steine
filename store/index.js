@@ -144,7 +144,7 @@ const createStore = () => {
       },
       pointerTo (state, payload) {
         state.pointer = payload
-        state.mode = "details"
+        //state.mode = "details"
         console.log("nach PointerTo", state.pointer)
       },
       changeMode (state, payload) {

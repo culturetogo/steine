@@ -101,12 +101,19 @@
               xlink:href="~/assets/Plan_Master_01.png">
               <title>Plan</title>
             </image>
-            <a
+            <!-- <a
               v-for="(marker, index) in getMarkers"
               :key="index"
               class="a-marker"
               xlink:href=""
               @click.prevent="$store.dispatch('pointerTo', marker.index)"
+            > -->
+            <a
+              v-for="(marker, index) in getMarkers"
+              :key="index"
+              class="a-marker"
+              xlink:href=""
+              @click.prevent="toggleModal(marker.index)"
             >
               <rect
                 :x="marker.marker_pos_left"
@@ -118,6 +125,14 @@
           </svg>
         </figure>
       </div>
+    </section>
+    <section class="container mt-5">
+      <!-- Modal Component -->
+      <b-modal
+        v-model="showModal"
+      >
+        <h3>{{ getTitel }}</h3>
+      </b-modal>
     </section>
   </div>
 </template>
@@ -136,7 +151,8 @@ export default {
     return {
       test: "data",
       out: "leer",
-      mapIcon: "~/assets/Plan_Master_01.png"
+      showModal: false,
+
     }
   },
   computed: {
@@ -162,9 +178,13 @@ export default {
     ])
   },
   methods: {
-    async stopAllAuido() {
-     console.log("Stop All Audio!")
-     console.log();
+    stopAllAuido() {
+     //console.log("Stop All Audio!")
+     //console.log();
+    },
+    toggleModal(mi) {
+      this.$store.dispatch('pointerTo', mi)
+      this._data.showModal = true
     }
   }
 }
