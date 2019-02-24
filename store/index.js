@@ -54,6 +54,9 @@ const createStore = () => {
       getBildSteinUrl (state) {
         return state.steine_ak_tour[state.pointer].attributes.bildstein.url
       },
+      getBildSteinLageUrl (state) {
+        return state.steine_ak_tour[state.pointer].attributes.bildsteinlage.url
+      },
       getTranskription (state) {
         return state.steine_ak_tour[state.pointer].attributes.transkription
       },

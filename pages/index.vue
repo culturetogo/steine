@@ -132,6 +132,20 @@
         v-model="showModal"
       >
         <h3>{{ getTitel }}</h3>
+        <div class="steinbildlage"><img
+          :src="getBildSteinLageUrl"
+          class="mx-auto d-block">
+        </div>
+        <div class="mmok-modal-footer">
+          <b-button
+            block
+            variant="secondary"
+            size = "small"
+            @click="aufrufStein"
+          >
+            Zu diesem Stein
+          </b-button>
+        </div>
       </b-modal>
     </section>
   </div>
@@ -161,6 +175,7 @@ export default {
       'getTour',
       'getTitel',
       'getBildSteinUrl',
+      'getBildSteinLageUrl',
       'getText',
       'getTranskription',
       'getInfo',
@@ -183,8 +198,13 @@ export default {
      //console.log();
     },
     toggleModal(mi) {
+      // ruft Modal mit dem ausgewählten Stein auf
       this.$store.dispatch('pointerTo', mi)
       this._data.showModal = true
+    },
+    aufrufStein () {
+      this._data.showModal = false
+      this.$store.state.mode = 'details'
     }
   }
 }
@@ -225,6 +245,10 @@ section {
   max-height: 16rem;
   height: auto;
 }
+.steinbildlage img {
+  max-height: 65vh;
+  max-width: 85%;
+}
 
 #map-container {
   position: relative;
@@ -242,5 +266,8 @@ section {
 }
 .a-marker {
   border: 1px solid red;
+}
+.mmok-modal-footer{
+  padding-top: .2rem;
 }
 </style>
