@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="mmok">
     <b-navbar
       type="dark"
       variant="info">
@@ -244,10 +244,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .mmok-content {
   padding: .4rem .6rem;
+}
+#mmok h2 {
+  font-size: 1.3rem;
+}
+#mmok h3 {
+  font-size: 1.1rem;
 }
 .navbar {
   display: flex;
