@@ -42,9 +42,17 @@
             :src="getBildSteinUrl"
           >
         </div>
+      </b-row>
+      <b-row
+        class="mmok-content"
+      >
         <div
           v-html = "getText"
         />
+      </b-row>
+      <b-row
+        class="mmok-content"
+      >
         <div
           v-if="getTranskription"
           id="transkription" >
@@ -52,6 +60,10 @@
           <div
             v-html = "getTranskription" />
         </div>
+      </b-row>
+      <b-row
+        class="mmok-content"
+      >
         <div
           v-if="getInfo"
           id="Info" >
@@ -59,6 +71,10 @@
           <p
             v-html = "getInfo" />
         </div>
+      </b-row>
+      <b-row
+        class="mmok-content"
+      >
         <div
           v-if="checkBibeltext"
           id="bibeltext" >
@@ -75,6 +91,10 @@
             Your browser does not support the audio element.
           </audio>
         </div>
+      </b-row>
+      <b-row
+        class="mmok-content"
+      >
         <div
           v-if="checkGesang"
           id="gesang" >
@@ -91,6 +111,10 @@
             Your browser does not support the audio element.
           </audio>
         </div>
+      </b-row>
+      <b-row
+        class="mmok-content"
+      >
         <hr>
         <div
           class="copyright"
