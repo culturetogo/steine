@@ -127,20 +127,20 @@
     >
       <div id="map-container">
         <figure id="imagemap">
-          <svg viewBox="0 0 1000 1000" >
+          <svg viewBox="0 0 2000 2000" >
             <defs>
               <style>
                 rect:hover {
                 fill: green;
-                opacity:0.5;
+                opacity:0;
                 }
               </style>
             </defs>
 
             <image
-              width="1000"
-              height="1000"
-              xlink:href="~/assets/Plan_Master_01.png">
+              width="2000"
+              height="2000"
+              xlink:href="~/assets/Plan_Master_02.png">
               <title>Plan</title>
             </image>
 
@@ -156,7 +156,7 @@
                 :y="marker.marker_pos_top"
                 :width="getMarker.width"
                 :height="getMarker.height"
-                opacity=".1" />
+                opacity="0" />
             </a>
           </svg>
         </figure>
@@ -233,7 +233,8 @@ export default {
     },
     toggleModal(mi) {
       // ruft Modal mit dem ausgewählten Stein auf
-      this.$store.dispatch('pointerTo', mi)
+      let index = mi -1
+      this.$store.dispatch('pointerTo', index)
       this._data.showModal = true
     },
     aufrufStein () {

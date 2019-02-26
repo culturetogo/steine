@@ -17,21 +17,81 @@ const createStore = () => {
       baseAudio: "http://chorin-content.culture-to-go.de/files/",
       audio: 1,
       marker: {
-        width: 60,
-        height: 60,
+        width: 131,
+        height: 128,
       },
       markers: [
         {
           index: 1,
           stein: "innen_1",
-          marker_pos_top: "120",
-          marker_pos_left: "200"
+          marker_pos_left: "1091",
+          marker_pos_top: "1126",
         },
         {
           index: 2,
           stein: "innen_2",
-          marker_pos_top: "240",
-          marker_pos_left: "100"
+          marker_pos_left: "1183",
+          marker_pos_top: "405",
+        },
+        {
+          index: 3,
+          stein: "innen_3",
+          marker_pos_left: "625",
+          marker_pos_top: "431",
+        },
+        {
+          index: 4,
+          stein: "innen_4",
+          marker_pos_left: "444",
+          marker_pos_top: "634",
+        },
+        {
+          index: 5,
+          stein: "innen_5",
+          marker_pos_left: "875",
+          marker_pos_top: "124",
+        },
+        {
+          index: 6,
+          stein: "innen_6",
+          marker_pos_left: "1581",
+          marker_pos_top: "226",
+        },
+        {
+          index: 7,
+          stein: "innen_7",
+          marker_pos_left: "1451",
+          marker_pos_top: "429",
+        },
+        {
+          index: 8,
+          stein: "innen_8",
+          marker_pos_left: "1417",
+          marker_pos_top: "46",
+        },
+        {
+          index: 9,
+          stein: "innen_9",
+          marker_pos_left: "1832",
+          marker_pos_top: "351",
+        },
+        {
+          index: 10,
+          stein: "innen_10",
+          marker_pos_left: "1583",
+          marker_pos_top: "607",
+        },
+        {
+          index: 11,
+          stein: "innen_11",
+          marker_pos_left: "1408",
+          marker_pos_top: "755",
+        },
+        {
+          index: 12,
+          stein: "innen_12",
+          marker_pos_left: "1215",
+          marker_pos_top: "685",
         }
       ]
     }),
