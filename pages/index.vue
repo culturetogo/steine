@@ -7,29 +7,44 @@
       variant="light">
       <b-navbar-toggle target="nav_text_collapse" />
 
-      <b-navbar-brand>
-        <b-button
-          variant="outline-dark"
-          @click="$store.dispatch('pointerVor', -1), stopAllAuido()"
-        >&lsaquo;
-        </b-button>
+      <b-navbar-brand
+        v-if = "getMode == 'details'"
+      >
         <div
-          class="anzeige-stein"
+          class="stein-anzeige-wrapper"
         >
-          {{ getTitel }}
+          <b-button
+            variant="outline-dark"
+            @click="$store.dispatch('pointerVor', -1), stopAllAudio()"
+          >&lsaquo;
+          </b-button>
+          <div
+            class="anzeige-stein"
+          >
+            {{ getTour }}<br>
+            <span
+              class="stein-nr"
+            >
+              {{ getTitel }}
+            </span>
+          </div>
+          <b-button
+            variant="outline-dark"
+            @click="$store.dispatch('pointerVor', 1), stopAllAudio()"
+          >&rsaquo;
+          </b-button>
         </div>
-        <b-button
-          variant="outline-dark"
-          @click="$store.dispatch('pointerVor', 1), stopAllAuido()"
-        >&rsaquo;
-        </b-button>
       </b-navbar-brand>
 
       <b-collapse
         id="nav_text_collapse"
         is-nav >
         <b-navbar-nav>
-          <b-nav-text>Navbar text</b-nav-text>
+          <b-nav-text
+            @click="backToMap"
+          >
+            Zum Plan
+          </b-nav-text>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -45,6 +60,29 @@
           <img
             :src="getBildSteinUrl"
           >
+        </div>
+      </b-row>
+      <b-row
+        class="sub-navi"
+      >
+        <div
+          class="stein-titel"
+        >
+          {{ getTitel }}
+        </div>
+        <div>
+          <b-button
+            variant="outline-dark"
+            @click="toggleModalStone"
+          >
+            Lage des Steins
+          </b-button>
+          <b-button
+            variant="outline-dark"
+            @click="backToMap"
+          >
+            Zum Plan
+          </b-button>
         </div>
       </b-row>
       <b-row
@@ -152,7 +190,7 @@
               :key="index"
               class="a-marker"
               xlink:href=""
-              @click.prevent="toggleModal(marker.index)"
+              @click.prevent="toggleModalMap(marker.index)"
             >
               <rect
                 :x="marker.marker_pos_left"
@@ -165,9 +203,9 @@
         </figure>
       </div>
     </b-container>
-    <!-- Modal Component -->
+    <!-- Modal Component Map -->
     <b-modal
-      v-model="showModal"
+      v-model="showModalMap"
     >
       <h3>{{ getTitel }}</h3>
       <div class="steinbildlage"><img
@@ -183,6 +221,16 @@
         >
           Zu diesem Stein
         </b-button>
+      </div>
+    </b-modal>
+    <!-- Modal Component Details -->
+    <b-modal
+      v-model="showModalDetails"
+    >
+      <h3>{{ getTitel }}</h3>
+      <div class="steinbildlage"><img
+        :src="getBildSteinLageUrl"
+        class="mx-auto d-block">
       </div>
     </b-modal>
   </div>
@@ -202,7 +250,8 @@ export default {
     return {
       test: "data",
       out: "leer",
-      showModal: false,
+      showModalMap: false,
+      showModalDetails: false
 
     }
   },
@@ -230,19 +279,29 @@ export default {
     ])
   },
   methods: {
-    stopAllAuido() {
+    stopAllAudio() {
      //console.log("Stop All Audio!")
      //console.log();
     },
-    toggleModal(mi) {
+    toggleModalMap(mi) {
       // ruft Modal mit dem ausgewählten Stein auf
       let index = mi -1
       this.$store.dispatch('pointerTo', index)
-      this._data.showModal = true
+      this._data.showModalDetails = false
+      this._data.showModalMap = true
+    },
+    toggleModalStone() {
+      // ruft Modal von der Detailseite zu einem Stein auf
+      this._data.showModalMap = false
+      this._data.showModalDetails = true
     },
     aufrufStein () {
-      this._data.showModal = false
-      this.$store.state.mode = 'details'
+      this._data.showModalMap = false
+      this.$store.dispatch('changeMode', 'details')
+    },
+    backToMap () {
+      this.$store.dispatch('changeMode', 'map')
+      console.log("BackToMap")
     }
   }
 }
@@ -255,8 +314,23 @@ body {
 .container {
   max-width: 36rem;
 }
-.mmok-content {
+.mmok-content,
+.sub-navi {
   padding: .4rem .6rem;
+}
+.sub-navi {
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-bottom: .6rem;
+  margin-bottom: .6rem;
+  border-bottom: 2px solid #eee;
+}
+.sub-navi .stein-titel {
+  align-self: flex-end;
+}
+.sub-navi .btn {
+  font-size: .68rem;
 }
 #mmok h2 {
   font-size: 1.3rem;
@@ -264,12 +338,21 @@ body {
 #mmok h3 {
   font-size: 1.1rem;
 }
+.stein-anzeige-wrapper {
+  display: flex;
+  justify-content: space-between;
+  min-width: 12rem;
+}
 .anzeige-stein {
   display: inline-block;
-  min-width: 4rem;
-  font-size: .9rem;
+  font-size: .75rem;
+  line-height: 1.1rem;
   font-weight: 600;
   text-align: center;
+}
+.anzeige-stein .stein-nr {
+  font-size: 1.1rem;
+  align-self: center;
 }
 .tour-button {
   display: block;

@@ -100,7 +100,8 @@ const createStore = () => {
         return state.mode
       },
       getTour (state) {
-        return state.tour
+        let str = "Rundgang " + state.tour
+        return str
       },
       getAudioVersion (state ) {
         return state.audio_version
