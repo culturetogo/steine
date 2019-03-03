@@ -86,17 +86,17 @@
         </div>
       </b-row>
       <b-row
-        class="mmok-content"
+        class="mmok-content text"
       >
         <div
           v-html = "getText"
         />
       </b-row>
       <b-row
-        class="mmok-content"
+        v-if="getTranskription"
+        class="mmok-content transkription"
       >
         <div
-          v-if="getTranskription"
           id="transkription" >
           <h3>Inschrift</h3>
           <div
@@ -104,10 +104,10 @@
         </div>
       </b-row>
       <b-row
-        class="mmok-content"
+        v-if="getInfo"
+        class="mmok-content info"
       >
         <div
-          v-if="getInfo"
           id="Info" >
           <h3>Weiterführende Information</h3>
           <p
@@ -115,10 +115,10 @@
         </div>
       </b-row>
       <b-row
-        class="mmok-content"
+        v-if="checkBibeltext"
+        class="mmok-content bibeltext"
       >
         <div
-          v-if="checkBibeltext"
           id="bibeltext" >
           <h3>Bibeltext</h3>
           <p
@@ -135,10 +135,10 @@
         </div>
       </b-row>
       <b-row
-        class="mmok-content"
+        v-if="checkGesang"
+        class="mmok-content gesang"
       >
         <div
-          v-if="checkGesang"
           id="gesang" >
           <h3>Gesang</h3>
           <div
@@ -155,11 +155,9 @@
         </div>
       </b-row>
       <b-row
-        class="mmok-content"
+        class="mmok-content copyright"
       >
-        <hr>
         <div
-          class="copyright"
           v-html="getCopyright" />
       </b-row>
     </b-container>
@@ -179,9 +177,11 @@
             </defs>
 
             <image
+              v-if="getAkTour == 'Innen'"
+              xlink:href="~/assets/Plan_Master_02.png"
               width="2000"
               height="2000"
-              xlink:href="~/assets/Plan_Master_02.png">
+            >
               <title>Plan</title>
             </image>
 
@@ -259,6 +259,7 @@ export default {
     ...mapGetters([
       'getMode',
       'getTour',
+      'getAkTour',
       'getTitel',
       'getBildSteinUrl',
       'getBildSteinLageUrl',
@@ -274,6 +275,7 @@ export default {
       'checkGesang',
       'getAudioVersion',
       'getAudio',
+      'getMapImage',
       'getMarker',
       'getMarkers'
     ])
@@ -333,10 +335,10 @@ body {
   font-size: .68rem;
 }
 #mmok h2 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 #mmok h3 {
-  font-size: 1.1rem;
+  font-size: 1.0rem;
 }
 .stein-anzeige-wrapper {
   display: flex;
@@ -379,7 +381,21 @@ body {
   max-height: 65vh;
   max-width: 85%;
 }
-
+.transkription,
+.bibeltext,
+.gesang {
+  line-height: 1.2rem;
+  font-size: .9rem;
+}
+.transkription p{
+  margin-bottom: .6rem;
+}
+.copyright {
+  font-size: .75rem;
+  padding-top: 1.4rem;
+  margin-top: 1.4rem;
+  border-top: 2px solid #eee;
+}
 #map-container {
   position: relative;
   width: 100%;
@@ -397,7 +413,13 @@ body {
 .a-marker {
   border: 1px solid red;
 }
+.modal h3 {
+  text-align: center;
+}
+.modal footer {
+  display: none;
+}
 .mmok-modal-footer{
-  padding-top: .2rem;
+  margin-top: 1rem;
 }
 </style>

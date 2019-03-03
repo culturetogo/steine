@@ -103,6 +103,9 @@ const createStore = () => {
         let str = "Rundgang " + state.tour
         return str
       },
+      getAkTour (state) {
+        return state.tour
+      },
       getAudioVersion (state ) {
         return state.audio_version
       },
@@ -156,6 +159,13 @@ const createStore = () => {
       },
       getAudio (state) {
         return state.audio
+      },
+      getMapImage (state) {
+        if( state.tour == "Innen" ) {
+          return "~/assets/Plan_Master_02.png"
+        } else {
+          return "~/assets/Plan_Master_01.png"
+        }
       },
       getMarker (state) {
         return state.marker
