@@ -20,7 +20,7 @@ const createStore = () => {
         width: 131,
         height: 128,
       },
-      markers: [
+      markersInnen: [
         {
           index: 1,
           stein: "innen_1",
@@ -92,6 +92,80 @@ const createStore = () => {
           stein: "innen_12",
           marker_pos_left: "1215",
           marker_pos_top: "685",
+        }
+      ],
+      markersAussen: [
+        {
+          index: 1,
+          stein: "außen_1",
+          marker_pos_left: "236",
+          marker_pos_top: "1220",
+        },
+        {
+          index: 2,
+          stein: "außen_2",
+          marker_pos_left: "237",
+          marker_pos_top: "1061",
+        },
+        {
+          index: 3,
+          stein: "außen_3",
+          marker_pos_left: "467",
+          marker_pos_top: "996",
+        },
+        {
+          index: 4,
+          stein: "außen_4",
+          marker_pos_left: "237",
+          marker_pos_top: "916",
+        },
+        {
+          index: 5,
+          stein: "außen_5",
+          marker_pos_left: "465",
+          marker_pos_top: "852",
+        },
+        {
+          index: 6,
+          stein: "außen_6",
+          marker_pos_left: "1191",
+          marker_pos_top: "91",
+        },
+        {
+          index: 7,
+          stein: "außen_7",
+          marker_pos_left: "1417",
+          marker_pos_top: "4",
+        },
+        {
+          index: 8,
+          stein: "außen_8",
+          marker_pos_left: "1572",
+          marker_pos_top: "202",
+        },
+        {
+          index: 9,
+          stein: "außen_9",
+          marker_pos_left: "1766",
+          marker_pos_top: "203",
+        },
+        {
+          index: 10,
+          stein: "außen_10",
+          marker_pos_left: "1862",
+          marker_pos_top: "453",
+        },
+        {
+          index: 11,
+          stein: "außen_11",
+          marker_pos_left: "1823",
+          marker_pos_top: "603",
+        },
+        {
+          index: 12,
+          stein: "außen_12",
+          marker_pos_left: "1592",
+          marker_pos_top: "642",
         }
       ]
     }),
@@ -171,7 +245,11 @@ const createStore = () => {
         return state.marker
       },
       getMarkers (state) {
-        return state.markers
+        if ( state.tour == "Innen" ) {
+          return state.markersInnen
+        } else {
+          return state.markersAussen
+        }
       }
     },
     mutations: {
@@ -215,11 +293,13 @@ const createStore = () => {
             state.pointer = 0
             state.steine_ak_tour = state.steine_innen
           }
+        console.log("steine_ak_tour: ", state.steine_ak_tour)
       },
       pointerTo (state, payload) {
+        console.log("pointerTo payload: ", payload)
         state.pointer = payload
         //state.mode = "details"
-        console.log("nach PointerTo", state.pointer)
+        //console.log("nach PointerTo", state.pointer)
       },
       changeMode (state, payload) {
         state.mode = payload
@@ -245,6 +325,9 @@ const createStore = () => {
       ,
       changeMode ({ commit }, m) {
         commit( 'changeMode', m)
+      },
+      toggleTour ( { commit } ) {
+        commit( 'toggleTour' )
       }
     }
   })

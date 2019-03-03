@@ -6,7 +6,6 @@
       type="light"
       variant="light">
       <b-navbar-toggle target="nav_text_collapse" />
-
       <b-navbar-brand
         v-if = "getMode == 'details'"
       >
@@ -35,7 +34,20 @@
           </b-button>
         </div>
       </b-navbar-brand>
-
+      <b-navbar-brand
+        v-if = "getMode == 'map'"
+      >
+        <div
+          class="tour-anzeige-wrapper"
+        >
+          <b-button
+            variant="outline-dark"
+            @click="$store.dispatch('toggleTour')"
+          >
+            Tour wechseln
+          </b-button>
+        </div>
+      </b-navbar-brand>
       <b-collapse
         id="nav_text_collapse"
         is-nav >
@@ -164,44 +176,97 @@
     <b-container
       v-if="getMode == 'map'"
     >
-      <div id="map-container">
-        <figure id="imagemap">
-          <svg viewBox="0 0 2000 2000" >
-            <defs>
-              <style>
-                rect:hover {
-                fill: green;
-                opacity:0;
-                }
-              </style>
-            </defs>
+      <b-row
+        class="sub-navi"
+      >
+        <div
+          class="tour-titel"
+        >
+          {{ getTour }}
+        </div>
+      </b-row>
+      <b-row>
+        <div
+          v-if="getAkTour == 'Innen'"
+          id="map-container"
+        >
+          <figure id="imagemap">
+            <svg viewBox="0 0 2000 2000" >
+              <defs>
+                <style>
+                  rect:hover {
+                  fill: green;
+                  opacity:0;
+                  }
+                </style>
+              </defs>
 
-            <image
-              v-if="getAkTour == 'Innen'"
-              xlink:href="~/assets/Plan_Master_02.png"
-              width="2000"
-              height="2000"
-            >
-              <title>Plan</title>
-            </image>
+              <image
+                xlink:href="~/assets/Plan_Master_02.png"
+                width="2000"
+                height="2000"
+              >
+                <title>Plan</title>
+              </image>
 
-            <a
-              v-for="(marker, index) in getMarkers"
-              :key="index"
-              class="a-marker"
-              xlink:href=""
-              @click.prevent="toggleModalMap(marker.index)"
-            >
-              <rect
-                :x="marker.marker_pos_left"
-                :y="marker.marker_pos_top"
-                :width="getMarker.width"
-                :height="getMarker.height"
-                opacity="0" />
-            </a>
-          </svg>
-        </figure>
-      </div>
+              <a
+                v-for="(marker, index) in getMarkers"
+                :key="index"
+                class="a-marker"
+                xlink:href=""
+                @click.prevent="toggleModalMap(marker.index)"
+              >
+                <rect
+                  :x="marker.marker_pos_left"
+                  :y="marker.marker_pos_top"
+                  :width="getMarker.width"
+                  :height="getMarker.height"
+                  opacity="0" />
+              </a>
+            </svg>
+          </figure>
+        </div>
+        <div
+          v-if="getAkTour == 'Außen'"
+          id="map-container"
+        >
+          <figure id="imagemap">
+            <svg viewBox="0 0 2000 2000" >
+              <defs>
+                <style>
+                  rect:hover {
+                  fill: green;
+                  opacity:0;
+                  }
+                </style>
+              </defs>
+
+              <image
+                xlink:href="~/assets/Plan_Master_01.png"
+                width="2000"
+                height="2000"
+              >
+                <title>Plan</title>
+              </image>
+
+              <a
+                v-for="(marker, index) in getMarkers"
+                :key="index"
+                class="a-marker"
+                xlink:href=""
+                @click.prevent="toggleModalMap(marker.index)"
+              >
+                <rect
+                  :x="marker.marker_pos_left"
+                  :y="marker.marker_pos_top"
+                  :width="getMarker.width"
+                  :height="getMarker.height"
+                  opacity="0" />
+              </a>
+            </svg>
+          </figure>
+        </div>
+      </b-row>
     </b-container>
     <!-- Modal Component Map -->
     <b-modal
@@ -288,6 +353,7 @@ export default {
     toggleModalMap(mi) {
       // ruft Modal mit dem ausgewählten Stein auf
       let index = mi -1
+      console.log("toggleMapIndex: ", index)
       this.$store.dispatch('pointerTo', index)
       this._data.showModalDetails = false
       this._data.showModalMap = true
@@ -311,10 +377,14 @@ export default {
 
 <style>
 body {
-  padding-top: 3.8rem;
+  padding-top: 4.2rem;
 }
-.container {
+.container,
+.navbar {
   max-width: 36rem;
+}
+.navbar {
+  margin: 0 auto;
 }
 .mmok-content,
 .sub-navi {
