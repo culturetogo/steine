@@ -1,33 +1,37 @@
 <template>
   <div id="mmok">
     <b-navbar
-      type="dark"
-      variant="info">
-      <b-navbar-brand>{{ getTitel }}</b-navbar-brand>
-      <b-navbar-nav
-        justified
-      >
-        <b-nav-item
+      toggleable
+      fixed = "top"
+      type="light"
+      variant="light">
+      <b-navbar-toggle target="nav_text_collapse" />
+
+      <b-navbar-brand>
+        <b-button
+          variant="outline-dark"
           @click="$store.dispatch('pointerVor', -1), stopAllAuido()"
+        >&lsaquo;
+        </b-button>
+        <div
+          class="anzeige-stein"
         >
-          &larr;
-        </b-nav-item>
-        <b-nav-item
-          @click="$store.dispatch('pointerVor', 1), stopAllAuido()"
-        >
-          &rarr;
-        </b-nav-item>
-        <!--
-          <button @click="$store.dispatch('pointerVor', -1), stopAllAuido()">&larr;</button>
-        <div class="tour-controls d-flex justify-content-around mt-3">
-          <p
-            class="tour-button"
-            @click="$store.commit('toggleTour')"><strong>{{ getTour }}</strong></p>
-          <p class="anz-stein"><strong>{{ getTitel }}</strong></p>
+          {{ getTitel }}
         </div>
-        <button @click="$store.dispatch('pointerVor', 1), stopAllAuido()">&rarr;</button>
-        -->
-      </b-navbar-nav>
+        <b-button
+          variant="outline-dark"
+          @click="$store.dispatch('pointerVor', 1), stopAllAuido()"
+        >&rsaquo;
+        </b-button>
+      </b-navbar-brand>
+
+      <b-collapse
+        id="nav_text_collapse"
+        is-nav >
+        <b-navbar-nav>
+          <b-nav-text>Navbar text</b-nav-text>
+        </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
     <b-container
       v-if="getMode == 'details'"
@@ -123,7 +127,6 @@
     </b-container>
     <b-container
       v-if="getMode == 'map'"
-      class= "mt-5"
     >
       <div id="map-container">
         <figure id="imagemap">
@@ -246,7 +249,12 @@ export default {
 </script>
 
 <style>
-
+body {
+  padding-top: 3.8rem;
+}
+.container {
+  max-width: 36rem;
+}
 .mmok-content {
   padding: .4rem .6rem;
 }
@@ -256,10 +264,12 @@ export default {
 #mmok h3 {
   font-size: 1.1rem;
 }
-.navbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.anzeige-stein {
+  display: inline-block;
+  min-width: 4rem;
+  font-size: .9rem;
+  font-weight: 600;
+  text-align: center;
 }
 .tour-button {
   display: block;
