@@ -1,6 +1,7 @@
 <template>
   <div id="mmok">
     <b-navbar
+      v-if = "getMode != 'intro'"
       toggleable
       fixed = "top"
       type="light"
@@ -57,11 +58,17 @@
           >
             Zum Plan
           </b-nav-text>
+          <b-nav-text
+            @click="backToIntro"
+          >
+            Zur Startseite
+          </b-nav-text>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
     <b-container
       v-if="getMode == 'details'"
+      class="main-content"
     >
       <b-row
         class="mmok-content"
@@ -175,6 +182,7 @@
     </b-container>
     <b-container
       v-if="getMode == 'map'"
+      class="main-content"
     >
       <b-row
         class="sub-navi"
@@ -268,6 +276,9 @@
         </div>
       </b-row>
     </b-container>
+    <Intro
+      v-if="getMode == 'intro'"
+    />
     <!-- Modal Component Map -->
     <b-modal
       v-model="showModalMap"
@@ -303,13 +314,13 @@
 
 <script>
 //import Logo from '~/components/Logo.vue'
-//import Map from '~/components/Map.vue'
+import Intro from '~/components/Intro.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     // Logo
-    // Map
+    Intro
   },
   data(){
     return {
@@ -369,7 +380,9 @@ export default {
     },
     backToMap () {
       this.$store.dispatch('changeMode', 'map')
-      console.log("BackToMap")
+    },
+    backToIntro () {
+      this.$store.dispatch('changeMode', 'intro')
     }
   }
 }
@@ -377,7 +390,7 @@ export default {
 
 <style>
 body {
-  padding-top: 4.2rem;
+
 }
 .container,
 .navbar {
@@ -403,6 +416,13 @@ body {
 }
 .sub-navi .btn {
   font-size: .68rem;
+}
+.main-content {
+  padding-top: 4.8rem;
+}
+.intro-content {
+  background: #A2232C;
+  min-height: 100vh;
 }
 #mmok h2 {
   font-size: 1.1rem;

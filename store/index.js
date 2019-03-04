@@ -6,7 +6,7 @@ const createStore = () => {
       counter: 0,
       output: "empty",
       testhtml: "<p>testabsatz</p>",
-      mode: 'map',
+      mode: 'intro',
       steine: [],
       steine_innen: [],
       steine_aussen: [],
