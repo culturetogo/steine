@@ -2,7 +2,6 @@
   <div id="mmok">
     <b-navbar
       v-if = "getMode != 'intro'"
-      toggleable
       fixed = "top"
       type="light"
       variant="light">
