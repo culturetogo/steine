@@ -315,6 +315,7 @@
 <script>
 //import Logo from '~/components/Logo.vue'
 import Intro from '~/components/Intro.vue'
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -359,7 +360,10 @@ export default {
   methods: {
     stopAllAudio() {
      //console.log("Stop All Audio!")
-     //console.log();
+     Vue.nextTick(() => {
+       Array.from(document.getElementsByTagName('audio'))
+        .forEach(audio => audio.load());
+     });
     },
     toggleModalMap(mi) {
       // ruft Modal mit dem ausgewählten Stein auf
