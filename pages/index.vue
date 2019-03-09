@@ -1,11 +1,11 @@
 <template>
   <div id="mmok">
+
     <Navbar v-if="getMode !== 'intro'"/>
-    <Details v-if="getMode === 'details'"/>
-    <Map v-if="getMode === 'map'"/>
-    <Intro
-      v-if="getMode == 'intro'"
-    />
+
+    <keep-alive>
+      <component :is="content"/>
+    </keep-alive>
     <!-- Modal Component Map -->
     <map-modal @input="aufrufStein"/>
     <!-- Modal Component Details -->
@@ -28,9 +28,9 @@ export default {
   components: {
     // Logo
     Navbar,
-    Intro,
-    Details,
-    Map,
+    'intro-content': Intro,
+    'details-content': Details,
+    'map-content': Map,
     'map-modal': MapModal,
     'details-modal': DetailsModal
   },
@@ -46,7 +46,10 @@ export default {
       'getMode',
       'getAudio',
       'getMarker'
-    ])
+    ]),
+    content() {
+      return this.getMode + '-content'
+    }
   },
   methods: {
     aufrufStein () {
