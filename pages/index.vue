@@ -44,49 +44,14 @@ export default {
   computed: {
     ...mapGetters([
       'getMode',
-      'getTour',
-      'getAkTour',
-      'getTitel',
-      'getBildSteinUrl',
-      'getBildSteinLageUrl',
-      'getText',
-      'getTranskription',
-      'getInfo',
-      'getCopyright',
-      'getBibeltext',
-      'getGesang',
-      'getIntroBibeltext',
-      'getIntroGesang',
-      'checkBibeltext',
-      'checkGesang',
-      'getAudioVersion',
       'getAudio',
-      'getMapImage',
-      'getMarker',
-      'getMarkers'
+      'getMarker'
     ])
   },
   methods: {
-    toggleModalMap(mi) {
-      // ruft Modal mit dem ausgewählten Stein auf
-      let index = mi -1
-      console.log("toggleMapIndex: ", index)
-      this.$store.dispatch('pointerTo', index)
-      this.$root.$emit('bv::show::modal', 'map-modal')
-    },
-    toggleModalStone() {
-      // ruft Modal von der Detailseite zu einem Stein auf
-      this.$root.$emit('bv::show::modal', 'details-modal')
-    },
     aufrufStein () {
       this.$root.$emit('bv::hide::modal', 'map-modal')
       this.$store.dispatch('changeMode', 'details')
-    },
-    backToMap () {
-      this.$store.dispatch('changeMode', 'map')
-    },
-    backToIntro () {
-      this.$store.dispatch('changeMode', 'intro')
     }
   }
 }
