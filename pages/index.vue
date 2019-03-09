@@ -279,55 +279,32 @@
       v-if="getMode == 'intro'"
     />
     <!-- Modal Component Map -->
-    <b-modal
-      v-model="showModalMap"
-    >
-      <h3>{{ getTitel }}</h3>
-      <div class="steinbildlage"><img
-        :src="getBildSteinLageUrl"
-        class="mx-auto d-block">
-      </div>
-      <div class="mmok-modal-footer">
-        <b-button
-          block
-          variant="secondary"
-          size = "small"
-          @click="aufrufStein"
-        >
-          Zu diesem Stein
-        </b-button>
-      </div>
-    </b-modal>
+    <map-modal @input="aufrufStein"/>
     <!-- Modal Component Details -->
-    <b-modal
-      v-model="showModalDetails"
-    >
-      <h3>{{ getTitel }}</h3>
-      <div class="steinbildlage"><img
-        :src="getBildSteinLageUrl"
-        class="mx-auto d-block">
-      </div>
-    </b-modal>
+    <details-modal/>
+
   </div>
 </template>
 
 <script>
 //import Logo from '~/components/Logo.vue'
 import Intro from '~/components/Intro.vue'
+import MapModal from '~/components/modals/map-modal.vue'
+import DetailsModal from '~/components/modals/details-modal.vue'
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     // Logo
-    Intro
+    Intro,
+    'map-modal': MapModal,
+    'details-modal': DetailsModal
   },
   data(){
     return {
       test: "data",
-      out: "leer",
-      showModalMap: false,
-      showModalDetails: false
+      out: "leer"
 
     }
   },
@@ -369,16 +346,14 @@ export default {
       let index = mi -1
       console.log("toggleMapIndex: ", index)
       this.$store.dispatch('pointerTo', index)
-      this._data.showModalDetails = false
-      this._data.showModalMap = true
+      this.$root.$emit('bv::show::modal', 'map-modal')
     },
     toggleModalStone() {
       // ruft Modal von der Detailseite zu einem Stein auf
-      this._data.showModalMap = false
-      this._data.showModalDetails = true
+      this.$root.$emit('bv::show::modal', 'details-modal')
     },
     aufrufStein () {
-      this._data.showModalMap = false
+      this.$root.$emit('bv::hide::modal', 'map-modal')
       this.$store.dispatch('changeMode', 'details')
     },
     backToMap () {
