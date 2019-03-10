@@ -284,7 +284,6 @@ const createStore = () => {
       ladeSeiten (state, payload) {
         let seiten = payload
         state.seiten = seiten
-        console.log("ladeSeiten", state.seiten[0].attributes.body)
       },
       SET_IP (state, payload) {
         state.output = payload
@@ -298,7 +297,6 @@ const createStore = () => {
         state.pointer = pointer
       },
       toggleTour (state) {
-        console.log("Tour vor Toggle: ", state.tour)
           if(state.tour === "Innen") {
             state.tour = "Außen"
             state.pointer = 0
@@ -308,7 +306,6 @@ const createStore = () => {
             state.pointer = 0
             state.steine_ak_tour = state.steine_innen
           }
-        console.log("steine_ak_tour: ", state.steine_ak_tour)
       },
       switchTourTo (state, payload) {
         state.tour = payload
@@ -321,14 +318,10 @@ const createStore = () => {
         }
       },
       pointerTo (state, payload) {
-        console.log("pointerTo payload: ", payload)
         state.pointer = payload
-        //state.mode = "details"
-        //console.log("nach PointerTo", state.pointer)
       },
       changeMode (state, payload) {
         state.mode = payload
-        console.log("ChangeMode: ", payload)
       }
     },
     actions: {
