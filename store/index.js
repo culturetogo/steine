@@ -11,6 +11,7 @@ const createStore = () => {
       steine_innen: [],
       steine_aussen: [],
       steine_ak_tour: [],
+      seiten: [],
       tour: "Innen",
       audio_version: 2,
       pointer: 0,
@@ -250,6 +251,9 @@ const createStore = () => {
         } else {
           return state.markersAussen
         }
+      },
+      getSeite (state) {
+        return state.seiten[0].attributes.body
       }
     },
     mutations: {
@@ -270,6 +274,11 @@ const createStore = () => {
           }
         }
         state.steine_ak_tour = state.steine_innen
+      },
+      ladeSeiten (state, payload) {
+        let seiten = payload
+        state.seiten = seiten
+        console.log("ladeSeiten", state.seiten[0].attributes.body)
       },
       SET_IP (state, payload) {
         state.output = payload
@@ -308,13 +317,13 @@ const createStore = () => {
     },
     actions: {
       async nuxtServerInit ({ commit }, { $axios }) {
-        //const res = await $axios.$get('http://icanhazip.com')
         const reset = []
         commit('ladeSteine', reset)
         const res = await $axios.$get('http://chorin-content.culture-to-go.de/json/steine/?sort=ordnungszahl&page[size]=500')
-        //commit('SET_IP', res)
+        const pages = await $axios.$get('http://chorin-content.culture-to-go.de/json/pages')
         commit('ladeSteine', res.data)
         commit('splitSteine')
+        commit('ladeSeiten', pages.data)
       },
       pointerVor ({ commit }, r) {
         commit('pointerMove', r)
