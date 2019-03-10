@@ -254,6 +254,12 @@ const createStore = () => {
       },
       getSeite (state) {
         return state.seiten[0].attributes.body
+      },
+      getSeiteInnen (state) {
+        return state.seiten[1].attributes.body
+      },
+      getSeiteAussen (state) {
+        return state.seiten[2].attributes.body
       }
     },
     mutations: {
@@ -304,6 +310,16 @@ const createStore = () => {
           }
         console.log("steine_ak_tour: ", state.steine_ak_tour)
       },
+      switchTourTo (state, payload) {
+        state.tour = payload
+        state.pointer = 0
+        if( payload == "Außen") {
+          state.steine_ak_tour = state.steine_aussen
+        }
+        if( payload == "Innen") {
+          state.steine_ak_tour = state.steine_innen
+        }
+      },
       pointerTo (state, payload) {
         console.log("pointerTo payload: ", payload)
         state.pointer = payload
@@ -337,6 +353,9 @@ const createStore = () => {
       },
       toggleTour ( { commit } ) {
         commit( 'toggleTour' )
+      },
+      switchTourTo ( { commit }, t ){
+        commit('switchTourTo', t)
       }
     }
   })

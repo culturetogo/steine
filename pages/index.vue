@@ -18,6 +18,9 @@
 //import Logo from '~/components/Logo.vue'
 import Navbar from '~/components/Navbar.vue'
 import Intro from '~/components/Intro.vue'
+import IntroGeneral from './intro_text_general.vue'
+import IntroInnen from './intro_text_innen.vue'
+import IntroAussen from './intro_text_aussen.vue'
 import Details from './details.vue'
 import Map from './map.vue'
 import MapModal from '~/components/modals/map-modal.vue'
@@ -29,6 +32,9 @@ export default {
     // Logo
     Navbar,
     'intro-content': Intro,
+    'intro-gen-content': IntroGeneral,
+    'intro-innen-content': IntroInnen,
+    'intro-aussen-content': IntroAussen,
     'details-content': Details,
     'map-content': Map,
     'map-modal': MapModal,

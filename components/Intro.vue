@@ -33,7 +33,7 @@
         <b-button
           block
           variant="light"
-          @click="backToMap"
+          @click="introGen"
         >
           Tour starten!
         </b-button>
@@ -60,6 +60,9 @@ export default {
     ])
   },
   methods: {
+    introGen () {
+      this.$store.dispatch('changeMode', 'intro-gen')
+    },
     backToMap () {
       this.$store.dispatch('changeMode', 'map')
     }

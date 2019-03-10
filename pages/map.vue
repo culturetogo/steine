@@ -93,11 +93,6 @@
         </figure>
       </div>
     </b-row>
-    <b-row>
-      <div
-        v-html="getSeite"
-      />
-    </b-row>
   </b-container>
 </template>
 
