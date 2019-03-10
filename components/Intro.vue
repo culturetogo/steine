@@ -62,7 +62,6 @@ export default {
   methods: {
     backToMap () {
       this.$store.dispatch('changeMode', 'map')
-      console.log("BackToMap")
     }
   }
 }
