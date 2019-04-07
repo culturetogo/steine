@@ -34,6 +34,7 @@ export default {
   methods: {
     aufrufStein() {
       this.$emit('input', false);
+      this.$router.push({path: '/details'})
     }
   }
 }

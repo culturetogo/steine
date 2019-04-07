@@ -116,6 +116,7 @@ export default {
       console.log("toggleMapIndex: ", index)
       this.$store.dispatch('pointerTo', index)
       this.$root.$emit('bv::show::modal', 'map-modal')
+
     }
   }
 }
