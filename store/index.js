@@ -321,6 +321,7 @@ const createStore = () => {
         state.pointer = payload
       },
       changeMode (state, payload) {
+        this.$router.push({path: payload})
         state.mode = payload
       }
     },

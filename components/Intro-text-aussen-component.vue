@@ -25,6 +25,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'IntroTextAussenComponent',
   computed: {
     ...mapGetters([
       'getSeiteAussen'

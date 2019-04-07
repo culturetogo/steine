@@ -32,6 +32,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'IntroTextGeneralComponent',
   computed: {
     ...mapGetters([
       'getSeite'
@@ -39,10 +40,10 @@ export default {
   },
   methods: {
     callIntroTextInnen () {
-      this.$store.dispatch('changeMode', 'intro-innen')
+      this.$store.dispatch('changeMode', 'intro-text-innen')
     },
     callIntroTextAussen () {
-      this.$store.dispatch('changeMode', 'intro-aussen')
+      this.$store.dispatch('changeMode', 'intro-text-aussen')
     },
     backToMap () {
       this.$store.dispatch('changeMode', 'map')

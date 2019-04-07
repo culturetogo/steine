@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     introGen () {
-      this.$store.dispatch('changeMode', 'intro-gen')
+      this.$store.dispatch('changeMode', 'intro-text-general')
     },
     backToMap () {
       this.$store.dispatch('changeMode', 'map')

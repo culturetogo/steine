@@ -25,6 +25,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'IntroTextInnenComponent',
   computed: {
     ...mapGetters([
       'getSeiteInnen'

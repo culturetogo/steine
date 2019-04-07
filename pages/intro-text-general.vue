@@ -1,29 +1,25 @@
 <template>
   <div id="mmok">
 
-    <Navbar v-if="getMode !== 'intro'"/>
+    <Navbar />
 
     <keep-alive>
-      <Map/>
+      <IntroGeneral />
     </keep-alive>
-    <!-- Modal Component Map -->
-    <map-modal @input="aufrufStein"/>
   </div>
 </template>
 
 <script>
 //import Logo from '~/components/Logo.vue'
 import Navbar from '~/components/Navbar.vue'
-import Map from '~/components/Map-component.vue'
-import MapModal from '~/components/modals/map-modal.vue'
+import IntroGeneral from '~/components/Intro-text-general-component.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     // Logo
     Navbar,
-    Map,
-    MapModal
+    IntroGeneral,
   },
   data(){
     return {
@@ -34,19 +30,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getMode',
-      'getAudio',
-      'getMarker'
+
     ]),
-    content() {
-      return this.getMode + '-content'
-    }
   },
   methods: {
-    aufrufStein () {
-      this.$root.$emit('bv::hide::modal', 'map-modal')
-      this.$store.dispatch('changeMode', 'details')
-    }
+
   }
 }
 </script>

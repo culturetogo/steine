@@ -4,10 +4,8 @@
     <Navbar v-if="getMode !== 'intro'"/>
 
     <keep-alive>
-      <component :is="content"/>
+      <Details />
     </keep-alive>
-    <!-- Modal Component Map -->
-    <map-modal @input="aufrufStein"/>
     <!-- Modal Component Details -->
     <details-modal/>
 
@@ -17,13 +15,7 @@
 <script>
 //import Logo from '~/components/Logo.vue'
 import Navbar from '~/components/Navbar.vue'
-import Intro from '~/components/Intro.vue'
-import IntroGeneral from './intro_text_general.vue'
-import IntroInnen from './intro_text_innen.vue'
-import IntroAussen from './intro_text_aussen.vue'
-import Details from '~/components/details.vue'
-import Map from './map.vue'
-import MapModal from '~/components/modals/map-modal.vue'
+import Details from '~/components/Details-component.vue'
 import DetailsModal from '~/components/modals/details-modal.vue'
 import { mapGetters } from 'vuex'
 
@@ -31,14 +23,8 @@ export default {
   components: {
     // Logo
     Navbar,
-    'intro-content': Intro,
-    'intro-gen-content': IntroGeneral,
-    'intro-innen-content': IntroInnen,
-    'intro-aussen-content': IntroAussen,
-    'details-content': Details,
-    'map-content': Map,
-    'map-modal': MapModal,
-    'details-modal': DetailsModal
+    Details,
+    DetailsModal
   },
   data(){
     return {
@@ -52,16 +38,10 @@ export default {
       'getMode',
       'getAudio',
       'getMarker'
-    ]),
-    content() {
-      return this.getMode + '-content'
-    }
+    ])
   },
   methods: {
-    aufrufStein () {
-      this.$root.$emit('bv::hide::modal', 'map-modal')
-      this.$store.dispatch('changeMode', 'details')
-    }
+
   }
 }
 </script>
